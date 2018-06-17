@@ -18,25 +18,23 @@ std::string savefile(std::string p, const std::string dirname, const std::string
 // Check the inputDir also the subDir and add the files' names and files' pathes to the map 'filePath' and the vector 'fileName'
 class inputFilePath
 {
-public:
+  public:
 	inputFilePath() = default;
-	inputFilePath(const std::string s, const std::string t) : inputDir(s), fileType(t)
-	{
-	
-	}
+	inputFilePath(const std::string s, const std::string t) : inputDir(s), fileType(t) {}
 	~inputFilePath() = default;
 
 	// Initial the class 'inputFilePath'
 	// return value:
 	// 0 - normal, 1 - failed
 	int initial(bool flag);
-	
+
 	std::map<std::string, std::string> filePath;
 	std::vector<std::string> fileName;
 	std::string inputDir;
 	std::string fileType;
 	bool CHECKSUBDIR = true;
-private:
+
+  private:
 	// Check the input directory and save the information of the file in defined file type into 'filePath' and 'fileName'
 	int getFileInfo(const std::string &s);
 	// Check the directory path, change '\' to '/' and add '/' to the end if it not exist

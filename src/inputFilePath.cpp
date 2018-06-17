@@ -5,7 +5,8 @@ int inputFilePath::initial(bool flag = true)
 	printf("%5s Check %5s in \"%20s\" %5s\n ", std::string(5, '=').c_str(), fileType.c_str(), inputDir.c_str(), std::string(5, '=').c_str());
 	if (flag)
 		printf("%4s CHECK SUB DIRECTORY FUNCTION IS OPEN!! %4s\n", std::string(4, '*').c_str(), std::string(4, '*').c_str());
-	else{
+	else
+	{
 		printf("%4s CHECK SUB DIRECTORY FUNCTION IS CLOSED!! %4s\n", std::string(4, '*').c_str(), std::string(4, '*').c_str());
 		CHECKSUBDIR = false;
 	}
@@ -14,16 +15,20 @@ int inputFilePath::initial(bool flag = true)
 	if (!getFileInfo(inputDir))
 	{
 		std::cout << "Check Files in: \"" << inputDir << "\" Succeed. And fileType is: \"" << fileType << "\"." << std::endl;
-	}else{
+	}
+	else
+	{
 		std::cout << "Check Files in: \"" << inputDir << "\" Failed. And fileType is: \"" << fileType << "\"." << std::endl;
 		return 1;
 	}
-	
+
 	if (fileName.empty() || filePath.empty())
 	{
 		std::cerr << "No Files Found in \"" << inputDir << "\"." << std::endl;
 		return 1;
-	}else{
+	}
+	else
+	{
 		printf("%4s Search File Complete, Total %5d Found. %4s\n", std::string(4, '=').c_str(), fileName.size(), std::string(4, '=').c_str());
 		return 0;
 	}
@@ -35,10 +40,14 @@ int inputFilePath::getFileInfo(const std::string &currentDir)
 	{
 		std::cerr << "Initial inputDir Failed, Input Path is empty." << std::endl;
 		return 1;
-	}else if (_access(currentDir.c_str(), 4)){
+	}
+	else if (_access(currentDir.c_str(), 4))
+	{
 		std::cerr << "Initial inputDir Failed, Input Path can not be accessed." << std::endl;
 		return 2;
-	}else{
+	}
+	else
+	{
 		std::cout << "Initial inputDir, Input Path: \"" << currentDir << "\"." << std::endl;
 	}
 
@@ -50,7 +59,7 @@ int inputFilePath::getFileInfo(const std::string &currentDir)
 	// time_t		time_write
 	// _fsize_t		size;
 	// char			name[260]
-	// 
+	//
 	std::string fp, fn;
 
 	intptr_t h;
@@ -66,7 +75,9 @@ int inputFilePath::getFileInfo(const std::string &currentDir)
 					if (CHECKSUBDIR)
 						getFileInfo(std::string(currentDir).append(fileInfo.name).append("/"));
 				}
-			}else{
+			}
+			else
+			{
 				fn.assign(fileInfo.name);
 				std::size_t sz = fn.size();
 				std::size_t pos = fn.rfind('.', std::string::npos);
@@ -94,17 +105,18 @@ void checkPath(std::string &filePath)
 			if (c == '\\')
 				c = '/';
 
-		if (GetFileAttributesA(filePath.c_str())&FILE_ATTRIBUTE_DIRECTORY)
+		if (GetFileAttributesA(filePath.c_str()) & FILE_ATTRIBUTE_DIRECTORY)
 		{
 			if (filePath[filePath.size() - 1] != '/')
 				filePath.append("/");
-		}		
+		}
 	}
 }
 
 int checkAndMakeDirectory(std::string path)
 {
-	if (_access(path.c_str(), 4)) {
+	if (_access(path.c_str(), 4))
+	{
 		if (_mkdir(path.c_str()) != 0)
 		{
 			std::cerr << "Problem creating output directory: " << path << std::endl;

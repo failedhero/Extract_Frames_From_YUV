@@ -24,7 +24,7 @@ class yuv;
 
 class InputYUV
 {
-public:
+  public:
 	InputYUV(const std::string s, const int h, const int w, const int c);
 	~InputYUV() = default;
 
@@ -32,7 +32,8 @@ public:
 	void close();
 
 	unsigned int nframes = 0;
-private:
+
+  private:
 	void chooseChromaFormat(const int chromaFormat);
 
 	std::string inputPath;
@@ -46,14 +47,16 @@ private:
 class yuv
 {
 	friend class InputYUV;
-public:
+
+  public:
 	yuv(const std::string s, const int h, const int w, const int c);
 	~yuv() = default;
 	virtual void generateFrame() = 0;
 	std::shared_ptr<cv::Mat> yuv2RGB();
 
 	float nframes = 0.0;
-protected:
+
+  protected:
 	bool checkInputPath(const std::string inputPath);
 	bool checkChromaFormat();
 	virtual void readFile();
@@ -71,38 +74,39 @@ protected:
 
 class yuv400 : public yuv
 {
-public:
-	yuv400(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) { }
+  public:
+	yuv400(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) {}
 	void generateFrame();
-protected:
+
+  protected:
 	void readFile();
 };
 
 class yuv411 : public yuv
 {
-public:
-	yuv411(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) { }
+  public:
+	yuv411(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) {}
 	void generateFrame();
 };
 
 class yuv420 : public yuv
 {
-public:
-	yuv420(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) { }
+  public:
+	yuv420(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) {}
 	void generateFrame();
 };
 
 class yuv422 : public yuv
 {
-public:
-	yuv422(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) { }
+  public:
+	yuv422(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) {}
 	void generateFrame();
 };
 
 class yuv444 : public yuv
 {
-public:
-	yuv444(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) { }
+  public:
+	yuv444(const std::string s, const int h, const int w, const int c) : yuv(s, h, w, c) {}
 	void generateFrame();
 };
 
