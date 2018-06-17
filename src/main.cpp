@@ -32,7 +32,7 @@ int main(int argc, char** argv)
         }
     #else
         // read from single YUV file
-        inputPath.assign("X:/Database/CSIQ/BasketballDrive/BasketballDrive_832x480_dst_00.yuv");
+        // inputPath.assign("X:/Database/CSIQ/BasketballDrive/BasketballDrive_832x480_dst_00.yuv");
         // read from directory containg YUV files
         inputPath.assign("X:/Database/CSIQ/");
 
