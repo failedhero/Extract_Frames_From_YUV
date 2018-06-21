@@ -1,1 +1,22 @@
 # InputYUV
+批量提取视频(.yuv格式)各帧图像并保存
+>InputYUV.exe <input path> <height> <width> <Chroma format> <output path>
+USAGE:
+    - <input path> 既可以为单个YUV文件路径,或者包含YUV文件的目录路径,如对于:"X:/Database/CSIQ/BasketballDrive/BasketballDrive_832x480_dst_00.yuv",
+    <input path>可直接为"X:/Database/CSIQ/BasketballDrive/BasketballDrive_832x480_dst_00.yuv",
+    或者为"X:/Database/CSIQ/BasketballDrive/",此时,不仅会提取'BasketballDrive_832x480_dst_00.yuv'的各帧图像,还会对该文件夹下的所有YUV文件进行批量提取,
+    或者为"X:/Database/CSIQ/",这时,则会对目录进行逐层扫描,提取该目录及各子目录下的所有YUV文件.
+    - <height> YUV视频文件的高度,要求适用于<input path>中的所有YUV文件,因此,<input path> 最好设定为范围内的YUV视频文件具有统一的尺寸大小.
+    - <width> YUV视频文件的宽度.
+    - <Chroma format> YUV视频文件的采样格式,该程序支持多种采样格式的YUV视频文件(包括YUV400/411/420/422/444),对于各采用格式的<Chroma format>取值如下:
+    YUV400:"400",YUV411:"411",YUV420:"420",YUV422:"422",YUV444:"444".
+    - <output path> 各视频帧提取保存目录,最终会将同一视频的各帧图像保存在同一文件夹下,并将文件夹命名为视频名字.
+
+ex.
+    >InputYUV.exe "X:/Database/CSIQ/BasketballDrive/BasketballDrive_832x480_dst_00.yuv" 480 832 420 "X:/Output"
+
+ps.
+    - 可修改main.cpp中line90:'yuvFileList.initial(true);'为'yuvFileList.initial(false);',并重新编译,即可禁止子目录的搜寻,只扫描<input path>下的
+    YUV文件.
+    - 可替换main.cpp中line104:'std::string savePath(savefile(outputPath, *file_name, "frame_", frame_idx, ".png"));'中的"frame_",达到修改
+    输出图像文件的命名前缀,至于输出图像文件的数字编号为数,可至inputFilePath.cpp中line145处('sprintf_s(ss, "%03d", frame_idx);')修改.
